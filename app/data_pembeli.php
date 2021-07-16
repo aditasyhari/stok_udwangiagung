@@ -17,8 +17,8 @@ class data_pembeli extends Model
     	'email_pembeli'
     ];
 
-    public function riwayat_pembelians()
+    public function riwayat()
     {
-        return $this->hasMany('App\riwayat_pembelian');
+        return $this->hasMany('App\Riwayat', 'pembeli_id');
     }
 }

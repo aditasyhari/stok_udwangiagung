@@ -61,5 +61,5 @@ Route::get('/modal/tambah', 'ModalController@tambah');
 Route::get('/modal/hapus', 'ModalController@hapus');
 
 //Kasir
-Route::get('/kasir/kasir','KasirController@index');
-Route::get('/kasir/tambah_barang','KasirController@tambah');
+Route::get('/kasir/kasir','RiwayatController@index');
+Route::post('/kasir/kasir','RiwayatController@store');
