@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 Use App\stok_barang;
+Use App\Pembelian;
 use Illuminate\Support\Facades\DB;
 
 
@@ -22,7 +23,8 @@ class StokController extends Controller
 
     public function keluar()
     {
-        return view('/stok/barang_keluar');
+        $pembelians = Pembelian::orderBy('id', 'desc')->get();
+        return view('/stok/barang_keluar', compact(['pembelians']));
     }
 
     public function simpan(Request $request)

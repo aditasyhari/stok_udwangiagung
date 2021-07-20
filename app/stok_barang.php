@@ -21,14 +21,13 @@ class stok_barang extends Model
     	'user_id'
     ];
     
-    // Tambahkan fungsi ini untuk merelasikan ke model riwayat_pembelian.
-    public function riwayat_pembelians()
+    public function pembelian()
     {
-        return $this->hasMany('App/riwayat_pembelian');
+        return $this->hasMany('App/Pembelian', 'stok_barang_id');
     }
 
     public function user()
     {
-        return $this->belongsTo('App\user');
+        return $this->belongsTo('App\user', 'id');
     }
 }
