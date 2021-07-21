@@ -1,7 +1,7 @@
 1. kode stok barang (done)
 2. kasir pembelian barang (done)
 3. riwayat barang keluar (done)
-4. riwayat pembelian pembeli
-5. nota pembelian email/cetak
+4. riwayat pembelian pembeli (done)
+5. nota pembelian email/cetak (done)
 6. pemilik bisa delete akun sekertaris
 7. fungsi semua cetak pdf

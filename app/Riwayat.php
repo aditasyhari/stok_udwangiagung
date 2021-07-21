@@ -18,4 +18,9 @@ class Riwayat extends Model
     {
         return $this->belongsTo('App\User', 'id');
     }
+
+    public function pembelian()
+    {
+        return $this->hasMany('App\Pembelian', 'riwayat_id');
+    }
 }

@@ -40,7 +40,6 @@ Stok Barang - Barang Keluar
 @endsection
 
 @section('js')
-<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#table').DataTable({

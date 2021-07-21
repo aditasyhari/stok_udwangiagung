@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\data_pembeli;
+use App\Riwayat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -72,7 +73,29 @@ class KeuanganController extends Controller
 
     public function riwayat($id)
     {
-        return view('keuangan.riwayat')->with('pembeli', data_pembeli::find($id));
+        $pembeli = data_pembeli::find($id);
+        return view('keuangan.riwayat', compact(['pembeli']));
+    }
+
+    public function detail_riwayat($id_pembeli, $id_riwayat)
+    {
+        $pembeli = data_pembeli::find($id_pembeli);
+        $riwayat = Riwayat::find($id_riwayat);
+        
+        return view('keuangan.detail-riwayat', compact(['pembeli', 'riwayat']));
+    }
+
+    public function update_riwayat(Request $request, $id_riwayat) {
+        $riwayat = Riwayat::find($id_riwayat);
+        $dibayar = $riwayat->dibayar + $request->bayar_hutang;
+
+        $riwayat->update([
+            'catatan' => $request->catatan,
+            'dibayar' => $dibayar,
+            'hutang' => $request->hutang
+        ]);
+
+        return back()->with('status', 'Data berhasil diperbarui !!');
     }
 
     public function ubah_pembeli($id)

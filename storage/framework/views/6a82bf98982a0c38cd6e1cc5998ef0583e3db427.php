@@ -14,39 +14,36 @@ Data Pembeli
         <p class="font-weight-bold">Email : <?php echo e($pembeli->email_pembeli); ?></p>
 
         <br/>
-		<table class='table table-bordered'>
 
-        <table class="table table-hover">
+        <table id="table" class="table table-hover">
+            <div class="mb-3" id="outside"></div>
             <thead class="thead-light">
                 <tr>
-                <th scope="col">Tanggal</th>
-                <th scope="col">Nama Barang</th>
-                <th scope="col">Jumlah</th>
-                <th scope="col">Harga</th>
-                <th scope="col">Total</th>
-                <th scope="col">Dibayar</th>
-                <th scope="col">Sisa</th>
-                <th scope="col">Aksi</th>
+                    <th scope="col">No</th>
+                    <th scope="col">Tanggal</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Dibayar</th>
+                    <th scope="col">Hutang</th>
+                    <th scope="col">Aksi</th>
                 </tr>
             </thead>
             <tbody>
+                <?php $__currentLoopData = $pembeli->riwayat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $r): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                <a href="" class="btn btn-primary">Update</a>
-                <a href="" class="btn btn-success">Cetak</a>
-                </td>
+                    <td><?php echo e($loop->iteration); ?></td>
+                    <td><?php echo e($r->tanggal_pembelian); ?></td>
+                    <td>Rp <?php echo e(number_format($r->total_pembelian, 0, ",", ".")); ?></td>
+                    <td>Rp <?php echo e(number_format($r->dibayar, 0, ",", ".")); ?></td>
+                    <td>Rp <?php echo e(number_format($r->hutang, 0, ",", ".")); ?></td>
+                    <td>
+                        <a href="<?php echo e(route('detailRiwayat', ['pembeli'=>$pembeli->id, 'riwayat'=>$r->id])); ?>" class="btn btn-secondary">Detail</a>
+                    </td>
                 </tr>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
         <div>
-        <a href="" class="btn btn-success" target="_blank">Cetak Semua Riwayat</a>
+        <!-- <a href="" class="btn btn-success" target="_blank">Cetak Semua Riwayat</a> -->
 
         <a href="/keuangan/<?php echo e($pembeli->id); ?>/ubah" class="btn btn-primary">Ubah</a>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusdiagram">Hapus</button>
@@ -71,5 +68,54 @@ Data Pembeli
         <a href="javascript:history.back()" class="btn btn-secondary">Kembali</a>
         </div>
 
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('js'); ?>
+<script>
+    $(document).ready(function() {
+        $('#table').DataTable({
+            buttons: [
+                    
+                {
+                    extend:    'copy',
+                    text:      '<i class="fa fa-copy"></i>',
+                    titleAttr: 'Copy',
+                    className: 'btn btn-md btn-copy'
+                },
+                {
+                    extend:    'excel',
+                    text:      '<i class="fa fa-file-excel-o"></i>',
+                    titleAttr: 'Excel',
+                    className: 'btn btn-md btn-excel'
+                },
+                {
+                    extend:    'pdf',
+                    text:      '<i class="fa fa-file-pdf-o"></i>',
+                    titleAttr: 'PDF',
+                    className: 'btn btn-md btn-pdf'
+                },
+                {
+                    extend:    'print',
+                    text:      '<i class="fa fa-print"></i>',
+                    titleAttr: 'Print',
+                    className: 'btn btn-md btn-print'
+                },
+                {
+                    extend:    'colvis',
+                    text:      '<i class="fa fa-eye"></i>',
+                    titleAttr: 'Visibility',
+                    className: 'btn btn-md  btn-colvis'
+                },
+
+            ],
+
+            lengthChange: true,
+            searching: true
+
+        })
+        .buttons()
+        .container()
+        .appendTo("#outside");
+    });
+</script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/aditasyhari/Project Laravel/ud_wangiagung/resources/views/keuangan/riwayat.blade.php ENDPATH**/ ?>

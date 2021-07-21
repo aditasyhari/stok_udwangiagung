@@ -48,6 +48,8 @@ Route::get('/stok/{stok}/update_barang', 'StokController@update_barang');
 //Keuangan
 Route::get('/keuangan/data_pembeli', 'KeuanganController@index');
 Route::get('/keuangan/{pembeli}/riwayat','KeuanganController@riwayat');
+Route::get('/keuangan/{pembeli}/riwayat/{riwayat}/detail','KeuanganController@detail_riwayat')->name('detailRiwayat');
+Route::post('/keuangan/riwayat/{riwayat}/update','KeuanganController@update_riwayat')->name('updateRiwayat');
 Route::get('/keuangan/tambahpembeli','KeuanganController@tambah');
 Route::get('/simpan-pembeli','KeuanganController@simpan_pembeli');
 Route::get('/keuangan/{pembeli}/delete', 'KeuanganController@hapus');
@@ -63,3 +65,6 @@ Route::get('/modal/hapus', 'ModalController@hapus');
 //Kasir
 Route::get('/kasir/kasir','RiwayatController@index');
 Route::post('/kasir/kasir','RiwayatController@store');
+
+//Kirim Email
+Route::get('/kirim-nota/{riwayat}/riwayat', 'KirimEmailController@kirim_nota')->name('kirimNota');

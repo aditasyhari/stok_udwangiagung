@@ -12,4 +12,8 @@ class Pembelian extends Model
     public function stok_barang() {
         return $this->belongsTo('App\stok_barang', 'id');
     }
+
+    public function riwayat() {
+        return $this->belongsTo('App\riwayat', 'id');
+    }
 }
