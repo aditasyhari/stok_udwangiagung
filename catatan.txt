@@ -5,4 +5,4 @@
 5. nota pembelian email/cetak (done)
 6. pemilik bisa delete akun sekertaris (done)
 7. fungsi semua cetak pdf (done)
-8. grafik modal 
+8. grafik modal (done)
