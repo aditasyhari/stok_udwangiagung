@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class modal extends Model
 {
     protected $table ='modals';
-    protected $fillable = ['bulan','modal'];
+    protected $guarded = ['id'];
     
     public function user()
     {

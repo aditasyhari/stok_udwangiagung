@@ -61,6 +61,7 @@ Route::get('/keuangan/{pembeli}/update_pembeli', 'KeuanganController@update_pemb
 Route::get('/keuangan/grafik', 'ModalController@grafik');
 Route::get('/modal/tambah', 'ModalController@tambah');
 Route::get('/modal/hapus', 'ModalController@hapus');
+Route::post('/modal/hapus/bulan', 'ModalController@hapus_bulan');
 
 //Kasir
 Route::get('/kasir/kasir','RiwayatController@index');

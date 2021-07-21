@@ -28,19 +28,19 @@ Stok Barang
             {{csrf_field()}}
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Pilih Bulan</label>
-                <select name="bulan" class="form-control" id="exampleFormControlSelect1">
-                <option value="Januari">Januari</option>
-                <option value="Februari">Februari</option>
-                <option value="Maret">Maret</option>
-                <option value="April">April</option>
-                <option value="Mei">Mei</option>
-                <option value="Juni">Juni</option>
-                <option value="Juli">Juli</option>
-                <option value="Agustus">Agustus</option>
-                <option value="September">September</option>
-                <option value="Oktober">Oktober</option>
-                <option value="November">November</option>
-                <option value="Desember">Desember</option>
+                <select name="id_bulan" class="form-control" id="exampleFormControlSelect1">
+                  <option value="1">Januari</option>
+                  <option value="2">Februari</option>
+                  <option value="3">Maret</option>
+                  <option value="4">April</option>
+                  <option value="5">Mei</option>
+                  <option value="6">Juni</option>
+                  <option value="7">Juli</option>
+                  <option value="8">Agustus</option>
+                  <option value="9">September</option>
+                  <option value="10">Oktober</option>
+                  <option value="11">November</option>
+                  <option value="12">Desember</option>
                 </select>
                 <small id="emailHelp" class="form-text text-muted">Pilih Bulan Untuk Penambahan Modal</small>
             </div>
@@ -111,7 +111,28 @@ Highcharts.chart('grafik', {
     }]
 });
 </script>
-<button type="button" class="btn btn-danger mb-3 mt-3" data-toggle="modal" data-target="#hapusdiagram">Bersihkan Diagram</button>
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-danger mr-5" data-toggle="modal" data-target="#hapusdiagram">Bersihkan Diagram</button>
+  <form id="form-hapus-modal" action="/modal/hapus/bulan" method="POST">
+  @csrf
+    <select name="id_bulan" id="" type="button" class="btn btn-secondary" required>
+      <option selected disabled>Pilih Bulan</option>
+      <option value="1">Januari</option>
+      <option value="2">Februari</option>
+      <option value="3">Maret</option>
+      <option value="4">April</option>
+      <option value="5">Mei</option>
+      <option value="6">Juni</option>
+      <option value="7">Juli</option>
+      <option value="8">Agustus</option>
+      <option value="9">September</option>
+      <option value="10">Oktober</option>
+      <option value="11">November</option>
+      <option value="12">Desember</option>
+    </select>
+  </form>
+  <button type="button" class="btn btn-danger" onclick="$('#hapusbulan').modal('show')">Hapus</button>
+</div>
 
 <div class="modal fade" id="hapusdiagram" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -124,6 +145,23 @@ Highcharts.chart('grafik', {
       </div>
       <div class="modal-footer">
         <a href="/modal/hapus" class="btn btn-danger">Bersihkan</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="hapusbulan" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Yakin hapus modal?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" onclick="$('#form-hapus-modal').submit()">Hapus</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
       </div>
     </div>
