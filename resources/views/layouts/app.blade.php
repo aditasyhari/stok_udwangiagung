@@ -53,6 +53,11 @@
                             <li class="nav-item">
                                 <a class="nav-link text-light" href="/kasir/kasir">{{ __('Pembelian') }}</a>
                             </li>
+                            @if(Auth()->user()->id == 3)
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="/sekertaris">{{ __('Sekertaris') }}</a>
+                            </li>
+                            @endif
                         @endguest    
                     </ul>
 

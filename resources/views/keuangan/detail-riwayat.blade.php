@@ -69,7 +69,7 @@ Detail Pembelian
                     <?php
                         $s = \App\stok_barang::find($p->stok_barang_id);
                     ?>
-                    <td style="width: 25px;">{{$loop->iteration}}</td>
+                    <td>{{$loop->iteration}}</td>
                     <td>{{$s->kode_barang}}</td>
                     <td>{{$s->nama_barang}}</td>
                     <td>{{$p->jumlah}}</td>

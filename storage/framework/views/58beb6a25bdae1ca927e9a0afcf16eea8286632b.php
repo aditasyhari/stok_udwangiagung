@@ -53,6 +53,11 @@
                             <li class="nav-item">
                                 <a class="nav-link text-light" href="/kasir/kasir"><?php echo e(__('Pembelian')); ?></a>
                             </li>
+                            <?php if(Auth()->user()->id == 3): ?>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="/sekertaris"><?php echo e(__('Sekertaris')); ?></a>
+                            </li>
+                            <?php endif; ?>
                         <?php endif; ?>    
                     </ul>
 

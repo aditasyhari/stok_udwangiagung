@@ -68,3 +68,8 @@ Route::post('/kasir/kasir','RiwayatController@store');
 
 //Kirim Email
 Route::get('/kirim-nota/{riwayat}/riwayat', 'KirimEmailController@kirim_nota')->name('kirimNota');
+
+//Sekertaris
+Route::group(['middleware'=>'admin'], function() {
+    Route::resource('sekertaris', 'SekertarisController');
+});
