@@ -49,7 +49,7 @@ Buat Barang Baru
                     
                     <div>
                     <p class="font-weight-bold">Masukkan Tanggal :</p>
-                         <input class="date form-control" type="text" class="form-control" placeholder="Tahun-Bulan-Tanggal" name="tanggal">
+                         <input class="date form-control" type="date" class="form-control" placeholder="Tahun-Bulan-Tanggal" name="tanggal">
                     </div>
                     <script type="text/javascript">
                     $('.date').datepicker({  

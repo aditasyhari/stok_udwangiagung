@@ -24,13 +24,12 @@ Stok Barang - Barang Keluar
         <tr>
             <?php
                 $r = \App\Riwayat::find($p->riwayat_id);
-                $s = \App\stok_barang::find($p->stok_barang_id);
                 $u = \App\data_pembeli::find($r->pembeli_id);
             ?>
             <td><?php echo e($loop->iteration); ?></td>
             <td><?php echo e($r->tanggal_pembelian); ?></td>
             <td><?php echo e($u->nama_pembeli); ?></td>
-            <td><?php echo e($s->nama_barang); ?></td>
+            <td><?php echo e($p->nama_barang); ?></td>
             <td><?php echo e($p->jumlah); ?></td>
             <td>Rp <?php echo e(number_format($p->total, 0, ",", ".")); ?></td>
         </tr>

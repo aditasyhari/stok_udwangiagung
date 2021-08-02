@@ -12,7 +12,7 @@ class StokController extends Controller
 {
     public function index()
     {
-        $stok_barangs = DB::table('stok_barangs')->orderBy('tanggal','desc')->paginate(5);
+        $stok_barangs = DB::table('stok_barangs')->orderBy('tanggal','desc')->get();
         return view('/stok/stok_barang',['stok_barangs' => $stok_barangs]);
     }
 

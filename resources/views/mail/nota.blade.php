@@ -181,13 +181,10 @@
 				<tbody>
                     @foreach($riwayat->pembelian as $p)
 					<tr>
-                        <?php
-                            $s = \App\stok_barang::find($p->stok_barang_id);
-                        ?>
-						<td><span contenteditable>kode {{$s->kode_barang}}</span></td>
-						<td><span contenteditable>{{$s->nama_barang}}</span></td>
+						<td><span contenteditable>kode {{$p->kode_barang}}</span></td>
+						<td><span contenteditable>{{$p->nama_barang}}</span></td>
 						<td><span contenteditable>{{$p->jumlah}}</span></td>
-						<td><span contenteditable>Rp {{number_format($s->harga_jual, 0, ",", ".")}}</span></td>
+						<td><span contenteditable>Rp {{number_format($p->harga, 0, ",", ".")}}</span></td>
 						<td><span>Rp {{number_format($p->total, 0, ",", ".")}}</span></td>
 					</tr>
                     @endforeach

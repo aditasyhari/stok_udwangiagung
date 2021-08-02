@@ -16,6 +16,6 @@ Tambahan
 - profile (done)
 
 Tambahan & perbaikan :
-1. Fungsi tombol hapus di halaman riwayat pembeli berfungsi menghapus salah satu data pembeli beserta riwayat pembeliannya
+1. Fungsi tombol hapus di halaman riwayat pembeli berfungsi menghapus salah satu data pembeli beserta riwayat pembeliannya (done)
 2. Di halaman kasir ketika menginput barang ada salah satu yang kosong maka ada peringatan, dan ketika mau di proses atau save ada pop up "apakah data sudah benar" lalu ada pilihan ya dan tidak (done)
-3. Fungsi hapus eror
+3. Fungsi hapus eror (done)
