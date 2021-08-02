@@ -26,7 +26,7 @@ Kasir
 <body>
 <h2 class="text-center my-1">Pembelian Barang</h2>
 
-<form action="{{ url('/kasir/kasir') }}" method="POST">
+<form id="kasir-form" action="{{ url('/kasir/kasir') }}" method="POST">
 @csrf
 <div class="row mt-3">
     <div class="col-lg-4 bg-white">
@@ -50,7 +50,7 @@ Kasir
                         <td>
                             <div class="form-group">
                                 <input type="text" value="<?=Auth::user()->name?>" class="form-control" readonly>
-                                <input type="hidden" id="user" value="<?=Auth::user()->id?>" name="kasir_id" class="form-control" readonly>
+                                <input type="hidden" id="user" value="<?=Auth::user()->name?>" name="nama_kasir" class="form-control" readonly>
                             </div>
                         </td>
                     </tr>
@@ -146,17 +146,14 @@ Kasir
             <div class="box-body table-responsive">
                 <table class="table table-bordered table-striped" id="table">
                     <thead>
-                        <tr>
-                            
-                            <th>Kode Barang</th>
-                            <th>Nama Barang</th>
-                            <th>Jumlah Barang</th>
-                            <th>Harga Barang</th>
-                            <th style="width: 200px;">Total</th>
-                            <th style="width: 10px;"></th>
-                        </tr>
+                        <th>Kode Barang</th>
+                        <th>Nama Barang</th>
+                        <th>Jumlah Barang</th>
+                        <th>Harga Barang</th>
+                        <th style="width: 200px;">Total</th>
+                        <th style="width: 10px;"></th>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                         
                     </tbody>
                 </table>
@@ -226,16 +223,61 @@ Kasir
 
     <div class="col-lg-3">
         <div>
-            <button id="cancel_payment" class="btn btn-flat btn-warning">
+            <button type="button" class="btn btn-flat btn-warning" onclick="batal()">
                 <i class="fa fa-refresh mr-2"></i> Batal
             </button><br><br>
-            <button type="submit" id="process_payment" class="btn btn-flat btn-lg btn-success">
+            <button type="button" id="process_payment" class="btn btn-flat btn-lg btn-success" onclick="proses()">
                 <i class="fa fa-paper-plane-o mr-2"></i> Proses Pembelian
             </button>
         </div>
     </div>
 </div>
 </form>
+
+<!-- Modal Peringatan -->
+<div class="modal fade" id="nullAlert" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="nullAlertLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nullAlertLabel">Peringatan !!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <h1 class="text-warning" style="font-size: 100px;">
+                    <i class="fa fa-exclamation-circle"></i>
+                </h1>
+                <h5>Tambahkan barang terlebih dahulu !!</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Konfirmasi -->
+<div class="modal fade" id="confirmAlert" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="confirmAlertLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmAlertLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Apakah data sudah benar ?</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                <button type="button" class="btn btn-success" onclick="formSubmit()">Ya</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 @endsection
 
@@ -334,9 +376,43 @@ Kasir
         }
         console.log(kembali.value)
     };
-    // Remove row
-    // $(".del").click(function () {
-    //     $(this).closest("tr").remove();
-    // });
+
+    // function batal
+    function batal() {
+        var bayar = document.getElementById('bayar').value = 0;
+        var sisa = document.getElementById('sisa').value = 0;
+        var kembali = document.getElementById('kembali').value = 0;
+        var jumlah = document.getElementById('jumlah').value = 1;
+        var catatan = document.getElementById('catatan').value = '';
+
+        input_total.value = 0;
+        pembelian_total.innerHTML = "Rp 0"
+
+        var item = document.getElementById("tbody");
+        item.parentNode.removeChild(item);
+    }
+
+    function proses() {
+        var tr = document.getElementById("tbody").childElementCount;
+        console.log(tr)
+        if(tr > 0) {
+            // console.log("sukses")
+            $('#confirmAlert').modal('show');
+        } else {
+            // console.log("gagal")
+            $('#nullAlert').modal('show');
+        }
+    }
+
+    function formSubmit() {
+        date = $('#date');
+        pembeli = $('#pembeli_id');
+
+        if(date.val() === '' | pembeli === '') {
+            alert('Lengkapi dulu data pembeli dan tanggal pembelian');
+        } else {
+            $('#kasir-form').submit();
+        }
+    }
 </script>
 @endsection

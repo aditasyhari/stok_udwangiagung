@@ -6,3 +6,16 @@
 6. pemilik bisa delete akun sekertaris (done)
 7. fungsi semua cetak pdf (done)
 8. grafik modal (done)
+
+===================================================================
+Tambahan
+- cetak pdf lengkap barang (done)
+- register redirect back (done)
+- button batal kasir (done)
+- kasir tidak dapat proses pembelian ketika tidak ada barang (done)
+- profile (done)
+
+Tambahan & perbaikan :
+1. Fungsi tombol hapus di halaman riwayat pembeli berfungsi menghapus salah satu data pembeli beserta riwayat pembeliannya
+2. Di halaman kasir ketika menginput barang ada salah satu yang kosong maka ada peringatan, dan ketika mau di proses atau save ada pop up "apakah data sudah benar" lalu ada pilihan ya dan tidak (done)
+3. Fungsi hapus eror

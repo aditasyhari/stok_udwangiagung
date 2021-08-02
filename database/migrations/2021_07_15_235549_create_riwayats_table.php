@@ -21,8 +21,9 @@ class CreateRiwayatsTable extends Migration
             $table->integer('kembali');
             $table->integer('hutang');
             $table->text('catatan')->nullable();
-            $table->foreignId('pembeli_id')->references('id')->on('data_pembelis');
-            $table->foreignId('kasir_id')->references('id')->on('users');
+            $table->string('nama_kasir');
+            $table->foreignId('pembeli_id')->references('id')->on('data_pembelis')->onDelete('cascade');
+            // $table->foreignId('kasir_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

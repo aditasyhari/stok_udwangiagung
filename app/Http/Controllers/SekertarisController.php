@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class SekertarisController extends Controller
 {
@@ -38,6 +40,19 @@ class SekertarisController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return back()->with('status', 'Akun sekertaris berhasil dibuat !!'); 
     }
 
     /**
@@ -51,6 +66,44 @@ class SekertarisController extends Controller
         //
     }
 
+    public function editProfile()
+    {
+        $user = User::find(Auth::user()->id);
+        return view('sekertaris.edit-profile', compact(['user']));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+
+        if(isset($request->password)) {
+            $this->validate($request, [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+    
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]);
+
+            return back()->with('status', 'Profile berhasil di update !!');
+        }
+
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+        ]);
+        
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+        
+        return back()->with('status', 'Profile berhasil di update !!');
+    }
     /**
      * Show the form for editing the specified resource.
      *

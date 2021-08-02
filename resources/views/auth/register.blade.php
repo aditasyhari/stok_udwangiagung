@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+Register Sekertaris
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -8,7 +12,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('registerUser') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -74,4 +78,33 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+@if(session('status'))
+    <script>
+        $(function() {
+            $('#staticBackdrop').modal('show');
+        });
+    </script>
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Berhasil !!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <div class="modal-body">
+                {{ session('status') }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+            </div>
+        </div>
+    </div>
+@endif
 @endsection

@@ -50,7 +50,8 @@ class RiwayatController extends Controller
             'hutang' => $request->hutang,
             'catatan' => $request->catatan,
             'pembeli_id' => $request->pembeli_id,
-            'kasir_id' => $request->kasir_id,
+            'nama_kasir' => $request->nama_kasir,
+            // 'kasir_id' => $request->kasir_id,
         ]);
 
         foreach($request->pembelian_barang as $p) {
@@ -58,9 +59,13 @@ class RiwayatController extends Controller
             $a = str_replace("']", '', $a);
             $b = explode("', '", $a);
 
+            $stok = stok_barang::find($b[0]);
+
             Pembelian::create([
                 'riwayat_id' => $riwayat->id,
-                'stok_barang_id' => $b[0],
+                'kode_barang' => $stok->kode_barang,
+                'nama_barang' => $stok->nama_barang,
+                'harga' => $stok->harga_jual,
                 'jumlah' => $b[1],
                 'total' => $b[2],
             ]);

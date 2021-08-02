@@ -33,6 +33,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
 //Stok Barang
 Route::get('/stok/stok_barang', 'StokController@index');
 Route::get('/stok/tambah', 'StokController@tambah');
@@ -74,3 +75,6 @@ Route::get('/kirim-nota/{riwayat}/riwayat', 'KirimEmailController@kirim_nota')->
 Route::group(['middleware'=>'admin'], function() {
     Route::resource('sekertaris', 'SekertarisController');
 });
+Route::post('/register', 'SekertarisController@store')->name('registerUser');
+Route::get('/profile', 'SekertarisController@editProfile')->name('editProfile');
+Route::post('/profile', 'SekertarisController@updateProfile')->name('updateProfile');
